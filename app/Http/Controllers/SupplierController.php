@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SupplierController extends Controller
 {
@@ -27,15 +30,39 @@ class SupplierController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'name' => 'required',
+            'email'=>  'required',
+            'mobile_no' => 'required',
+            'address' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $supplier = new Supplier();
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->mobile_no= $request->mobile_no;
+            $supplier->address = $request->address;
+//        $supplier->created_by = Auth::user()->id;
+            $supplier->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'post added successfully',
+
+            ]);
+        }
+
+
     }
 
     /**

@@ -25,6 +25,8 @@ Route::get('/product', [ProductController::class, 'index'])->name('product.index
 Route::get('/unit', [UnitController::class, 'index'])->name('unit.index');
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
+Route::post('/post-supplier', [SupplierController::class, 'store']);
+
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
 
 

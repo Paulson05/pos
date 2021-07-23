@@ -2,7 +2,7 @@
 <link rel="apple-touch-icon" sizes="76x76" href="{{asset('backend/assets/img/apple-icon.png')}}">
 <link rel="icon" type="image/png" href="../assets/img/favicon.html">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>post @yield('title')</title>
+<title>pos @yield('title')</title>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 <!-- Canonical SEO -->
 <link rel="canonical" href="https://www.creative-tim.com/product/light-bootstrap-dashboard-pro" />
@@ -15,6 +15,7 @@
 <meta itemprop="image" content="../../../s3.amazonaws.com/creativetim_bucket/products/34/original/opt_lbd_pro_thumbnail.jpg">
 <!-- Twitter Card data -->
 <!-- Open Graph data -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta property="og:title" content="Light Bootstrap Dashboard PRO by Creative Tim" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="dashboard.html" />
