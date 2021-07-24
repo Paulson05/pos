@@ -99,11 +99,11 @@
 
                                     <tbody>
                                     <tr>
-                                        <td>Timothy Mooney</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>37</td>
-                                        <td>2008/12/11</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="text-right">
                                             <a href="#" class="btn btn-link btn-info like"><i class="fa fa-heart"></i></a>
                                             <a href="#" class="btn btn-link btn-warning edit"><i class="fa fa-edit"></i></a>
@@ -123,21 +123,21 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            fetchpost();
-            function fetchpost() {
+            fetchproduct();
+            function fetchproduct() {
                 $.ajax({
                     type: "GET",
-                    url:"",
+                    url:"/fetchproduct",
                     dataType:"json",
                     success: function (response) {
                         // console.log(response.posts);
 
                         $('tbody').html("");
-                        $.each(responseposts, function (key, item){
+                        $.each(response.suppliers, function (key, item){
                             $('tbody').append('<tr>\
                                             <td>'+item.id+'</td>\
                                            <td>'+item.name+'</td>\
-                                           <td>'+item.phone_number+'</td>\
+                                           <td>'+item.mobile_no+'</td>\
                                            <td>'+item.email+'</td>\
                                            <td>'+item.address+'</td>\
                                             <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>\
@@ -313,7 +313,7 @@
                             $('#success_message').text("response.message");
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
-                            // fetchpost();
+                            fetchproduct();
                         }
 
                     }

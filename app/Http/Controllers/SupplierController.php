@@ -65,15 +65,16 @@ class SupplierController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Supplier  $supplier
-     * @return \Illuminate\Http\Response
-     */
+public function fetchproduct(){
+    $suppliers = Supplier::all();
+    return response()->json([
+        'suppliers'=>$suppliers,
+    ]);
+}
+
     public function show(Supplier $supplier)
     {
-        //
+
     }
 
     /**

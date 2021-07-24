@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -27,15 +28,44 @@ class CustomerController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'name' => 'required',
+            'email'=>  'required',
+            'mobile_no' => 'required',
+            'address' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $customer = new Customer();
+            $customer->name = $request->name;
+            $customer->email = $request->email;
+            $customer->mobile_no= $request->mobile_no;
+            $customer->address = $request->address;
+//        $supplier->created_by = Auth::user()->id;
+            $customer->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'post added successfully',
+
+            ]);
+        }
+    }
+
+    public function  fetchcustomer(){
+        $customers = Customer::all();
+        return response()->json([
+            'customers'=>$customers,
+        ]);
     }
 
     /**

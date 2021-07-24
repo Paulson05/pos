@@ -18,49 +18,49 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <ul id="saveform_errList"></ul>
-                                    <div id="success_message"></div>
+                                    <ul class="pl-3 text-center list-unstyled" id="saveform_errList"></ul>
+                                    <div class="text-center" id="success_message"></div>
 
 
 
                                     <div class="row">
 
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                                             <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
+                                                <strong>Customer name</strong>
+                                                <input type="text" name="name"  id="name" class="name form-control" placeholder="supplier name" >
 
                                             </div>
 
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                                             <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
+                                                <strong>phone number</strong>
+                                                <input type="number" name="mobile_no" id="mobile_no" class="mobile_no form-control" placeholder="phone number" >
 
                                             </div>
 
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                                             <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
+                                                <strong>Email</strong>
+                                                <input type="text" name="email" class="email form-control" placeholder="email">
 
                                             </div>
 
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                                             <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
+                                                <strong>Address</strong>
+                                                <input type="text" name="address" class="address form-control" placeholder="address" >
 
                                             </div>
 
                                         </div>
 
-
-
-
+                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                            <button type="submit" class="add_customer btn btn-primary">Save</button>
+                                        </div>
                                     </div>
 
 
@@ -99,11 +99,11 @@
 
                                     <tbody>
                                     <tr>
-                                        <td>Timothy Mooney</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>37</td>
-                                        <td>2008/12/11</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td><button type="button"   class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>
                                         <td><button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash"></i></button></td>
 
@@ -121,23 +121,23 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            fetchpost();
-            function fetchpost() {
+            fetchcustomer();
+            function  fetchcustomer() {
                 $.ajax({
                     type: "GET",
-                    url:"",
+                    url:"/fetchcustomer/",
                     dataType:"json",
                     success: function (response) {
                         // console.log(response.posts);
 
                         $('tbody').html("");
-                        $.each(response.posts, function (key, item){
+                        $.each(response.customers, function (key, item){
                             $('tbody').append('<tr>\
                                             <td>'+item.id+'</td>\
-                                           <td>'+item.title+'</td>\
-                                           <td>'+item.slug+'</td>\
-                                           <td>'+item.image+'</td>\
-                                           <td>'+item.category_id+'</td>\
+                                           <td>'+item.name+'</td>\
+                                           <td>'+item.mobile_no+'</td>\
+                                           <td>'+item.email+'</td>\
+                                           <td>'+item.address+'</td>\
                                             <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>\
                                               <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash"></i></button></td>\
                                             </tr>');
@@ -272,16 +272,14 @@
             {{--add post--}}
 
 
-            $(document).on('click', '.add_product', function (e){
+            $(document).on('click', '.add_customer', function (e){
                 e.preventDefault();
                 // console.log('click');
                 var data = {
-                    'title' : $('.title').val(),
-                    'body' : $('textarea#mytextarea').val(),
                     'name' : $('.name').val(),
-                    'slug' : $('.slug').val(),
-                    'image' : $('.image').attr("src", data),
-                    'category_id' : $('.category_id:checked').val(),
+                    'mobile_no' : $('.mobile_no').val(),
+                    'email' : $('.email').val(),
+                    'address' : $('.address').val(),
                 }
                 // console.log(data);
                 $.ajaxSetup({
@@ -292,10 +290,10 @@
 
                 $.ajax({
                     type: "POST",
-                    url:"/post/",
+                    url:"/post-customer/",
                     data:data,
                     dataType:"json",
-                    datType: "image/jpeg",
+
                     success: function (response){
                         // console.log(response);
                         if (response.status == 400)
@@ -309,10 +307,10 @@
                         else{
                             $('#saveform_errList').html("");
                             $('#success_message').addClass("alert  alert-success");
-                            $('#success_message').text("response.message");
+                            $('#success_message').text(response.message);
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
-                            fetchpost();
+                            fetchcustomer();
                         }
 
                     }
