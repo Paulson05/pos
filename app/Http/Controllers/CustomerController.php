@@ -79,37 +79,70 @@ class CustomerController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
+
+    public function edit($id)
     {
-        //
+        $customer =Customer::find($id);
+
+        if ($customer)
+        {
+            return response()->json([
+                'status' => 200,
+                'customer' => $customer,
+
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'customer added succesfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Customer $customer)
+
+
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'name' => 'required',
+            'email'=>  'required',
+            'mobile_no' => 'required',
+            'address' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $customer = Customer::find($id);
+            $customer->name = $request->name;
+            $customer->email = $request->email;
+            $customer->mobile_no= $request->mobile_no;
+            $customer->address = $request->address;
+//        $supplier->created_by = Auth::user()->id;
+            $customer->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'post added successfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        $post = Customer::find($id);
+        $post->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'post deleted successfully',
+
+        ]);
     }
 }

@@ -63,48 +63,71 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Category $category)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
+
+    public function edit( $id)
     {
-        //
+        $category =Category::find($id);
+
+        if ( $category)
+        {
+            return response()->json([
+                'status' => 200,
+                'category' => $category,
+
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'category added succesfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
+
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'name' => 'required',
+
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $category = Category::find($id);
+            $category->name = $request->name;
+
+//        $supplier->created_by = Auth::user()->id;
+            $category->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'post added successfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $post = Category::find($id);
+        $post->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'post deleted successfully',
+
+        ]);
     }
 }

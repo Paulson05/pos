@@ -73,37 +73,65 @@ class UnitController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\unit  $unit
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(unit $unit)
+
+    public function edit($id)
     {
-        //
+
+        $unit =Unit::find($id);
+
+        if ($unit)
+        {
+            return response()->json([
+                'status' => 200,
+                'unit' => $unit,
+
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'unit added succesfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\unit  $unit
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, unit $unit)
+
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'name' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $unit =  Unit::find($id);
+            $unit->name = $request->name;
+
+//        $supplier->created_by = Auth::user()->id;
+            $unit->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'unit added successfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\unit  $unit
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(unit $unit)
+    public function destroy($id)
     {
-        //
+        $post = Unit::find($id);
+        $post->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'post deleted successfully',
+
+        ]);
     }
 }

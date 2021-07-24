@@ -77,37 +77,70 @@ public function fetchproduct(){
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Supplier  $supplier
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Supplier $supplier)
+
+    public function edit($id)
     {
-        //
+
+        $supplier =Supplier::find($id);
+
+        if ($supplier)
+        {
+            return response()->json([
+                'status' => 200,
+                'supplier' => $supplier,
+
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'supllier added succesfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Supplier  $supplier
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Supplier $supplier)
+
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'name' => 'required',
+            'email'=>  'required',
+            'mobile_no' => 'required',
+            'address' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $supplier = Supplier::find($id);
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->mobile_no= $request->mobile_no;
+            $supplier->address = $request->address;
+//        $supplier->created_by = Auth::user()->id;
+            $supplier->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'post added successfully',
+
+            ]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Supplier  $supplier
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
-        //
+        $post = Supplier::find($id);
+        $post->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'post deleted successfully',
+
+        ]);
     }
 }

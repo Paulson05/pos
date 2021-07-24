@@ -25,22 +25,43 @@ Route::get('/', function () {
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 Route::post('/post-product', [ProductController::class, 'store']);
 Route::get('/fetch-product', [ProductController::class, 'fetchProduct']);
+Route::get('/edit-product/{id}', [ ProductController::class, 'edit']);
+Route::put('/update-product/{id}', [ProductController::class, 'update']);
+Route::delete('/delete-product/{id}', [ProductController::class, 'destroy']);
+
 //unit
 Route::get('/unit', [UnitController::class, 'index'])->name('unit.index');
 Route::post('/post-unit', [UnitController::class, 'store']);
 Route::get('/fetch-unit', [UnitController::class, 'fetchUnit']);
+Route::get('/edit-unit/{id}', [UnitController::class, 'edit']);
+Route::put('/update-unit/{id}', [UnitController::class, 'update']);
+Route::delete('/delete-unit/{id}', [UnitController::class, 'destroy']);
+
 //category
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 Route::post('/post-category', [CategoryController::class, 'store']);
 Route::get('/fetch-category', [CategoryController::class, 'fetchCategory']);
+Route::get('/edit-category/{id}', [CategoryController::class, 'edit']);
+Route::put('/update-category/{id}', [CategoryController::class, 'update']);
+Route::delete('/delete-category/{id}', [CategoryController::class, 'destroy']);
+
+
 //supplier
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
 Route::post('/post-supplier', [SupplierController::class, 'store']);
 Route::get('/fetchproduct', [SupplierController::class, 'fetchproduct']);
+Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+Route::put('/update-product/{id}', [SupplierController::class, 'update']);
+Route::delete('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+
 //customer
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
 Route::post('/post-customer', [CustomerController::class, 'store']);
 Route::get('/fetchcustomer', [CustomerController::class, 'fetchcustomer']);
+Route::get('/edit-customer/{id}', [CustomerController::class, 'edit']);
+Route::put('/update-customer/{id}', [CustomerController::class, 'update']);
+Route::delete('/delete-customer/{id}', [CustomerController::class, 'destroy']);
+
 
 
 
