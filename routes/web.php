@@ -22,7 +22,11 @@ Route::get('/', function () {
     return view('backend.template.default');
 });
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+//unit
 Route::get('/unit', [UnitController::class, 'index'])->name('unit.index');
+Route::post('/post-unit', [UnitController::class, 'store']);
+Route::get('/fetch-unit', [UnitController::class, 'fetchUnit']);
+
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
 Route::post('/post-supplier', [SupplierController::class, 'store']);

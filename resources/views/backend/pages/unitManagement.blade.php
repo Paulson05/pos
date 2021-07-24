@@ -12,14 +12,14 @@
                             <div class="modal-content">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Creat Unit</h4>
+                                    <h4 class="modal-title">Creat unit</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <ul id="saveform_errList"></ul>
-                                    <div id="success_message"></div>
+                                    <ul class="pl-3 text-center list-unstyled" id="saveform_errList"></ul>
+                                    <div class="text-center" id="success_message"></div>
 
 
 
@@ -27,38 +27,16 @@
 
                                         <div class="col-xs-12 col-sm-12 col-md-12 text-left">
                                             <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
+                                                <strong>unit name</strong>
+                                                <input type="text" name="name"  id="name" class="name form-control" placeholder="supplier name" >
 
                                             </div>
 
                                         </div>
+
                                         <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
-
-                                            </div>
-
+                                            <button type="submit" class="add_unit btn btn-primary">Save</button>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
-
-                                            </div>
-
-                                        </div>
-
-
                                     </div>
 
 
@@ -86,27 +64,19 @@
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th class="disabled-sorting text-right">Actions</th>
+                                        <th>S/N</th>
+                                        <th>name</th>
+
                                     </tr>
                                     </thead>
 
                                     <tbody>
                                     <tr>
-                                        <td>Timothy Mooney</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>37</td>
-                                        <td>2008/12/11</td>
-                                        <td class="text-right">
-                                            <a href="#" class="btn btn-link btn-info like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="btn btn-link btn-warning edit"><i class="fa fa-edit"></i></a>
-                                            <a href="#" class="btn btn-link btn-danger remove"><i class="fa fa-times"></i></a>
-                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button type="button"   class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>
+                                        <td><button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash"></i></button></td>
+
                                     </tr>
                                     </tbody>
                                 </table>
@@ -121,25 +91,22 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            fetchpost();
-            function fetchpost() {
+            fetchcustomer();
+            function  fetchcustomer() {
                 $.ajax({
                     type: "GET",
-                    url:"",
+                    url:"/fetch-unit/",
                     dataType:"json",
                     success: function (response) {
                         // console.log(response.posts);
 
                         $('tbody').html("");
-                        $.each(response.posts, function (key, item){
+                        $.each(response.units, function (key, item){
                             $('tbody').append('<tr>\
                                             <td>'+item.id+'</td>\
-                                           <td>'+item.title+'</td>\
-                                           <td>'+item.slug+'</td>\
-                                           <td>'+item.image+'</td>\
-                                           <td>'+item.category_id+'</td>\
-                                            <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>\
-                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash"></i></button></td>\
+                                           <td>'+item.name+'</td>\
+                                            <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit">edit</i></button></td>\
+                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash">delete</i></button></td>\
                                             </tr>');
                         });
                     }
@@ -272,16 +239,12 @@
             {{--add post--}}
 
 
-            $(document).on('click', '.add_product', function (e){
+            $(document).on('click', '.add_unit', function (e){
                 e.preventDefault();
                 // console.log('click');
                 var data = {
-                    'title' : $('.title').val(),
-                    'body' : $('textarea#mytextarea').val(),
                     'name' : $('.name').val(),
-                    'slug' : $('.slug').val(),
-                    'image' : $('.image').attr("src", data),
-                    'category_id' : $('.category_id:checked').val(),
+
                 }
                 // console.log(data);
                 $.ajaxSetup({
@@ -292,10 +255,10 @@
 
                 $.ajax({
                     type: "POST",
-                    url:"/post/",
+                    url:"/post-unit/",
                     data:data,
                     dataType:"json",
-                    datType: "image/jpeg",
+
                     success: function (response){
                         // console.log(response);
                         if (response.status == 400)
@@ -309,10 +272,10 @@
                         else{
                             $('#saveform_errList').html("");
                             $('#success_message').addClass("alert  alert-success");
-                            $('#success_message').text("response.message");
+                            $('#success_message').text(response.message);
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
-                            fetchpost();
+                            fetchcustomer();
                         }
 
                     }

@@ -1,5 +1,5 @@
 @extends('backend.template.default')
-@section('title', '| unit')
+@section('title', '| customer')
 @section('body')
     <div class="content">
         <div class="container-fluid">
@@ -138,8 +138,8 @@
                                            <td>'+item.mobile_no+'</td>\
                                            <td>'+item.email+'</td>\
                                            <td>'+item.address+'</td>\
-                                            <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>\
-                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash"></i></button></td>\
+                                            <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit">edit</i></button></td>\
+                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash">delete</i></button></td>\
                                             </tr>');
                         });
                     }
