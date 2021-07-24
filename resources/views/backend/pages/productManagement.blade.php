@@ -3,6 +3,7 @@
 @section('body')
     <div class="content">
         <div class="container-fluid">
+            <h4>create product</h4>
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addModal">add</button>
@@ -11,64 +12,82 @@
                             <div class="modal-content">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Creat Product</h4>
+                                    <h4 class="modal-title">Creat product</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <ul id="saveform_errList"></ul>
-                                    <div id="success_message"></div>
+                                    <ul class="pl-3 text-center list-unstyled" id="saveform_errList"></ul>
+                                    <div class="text-center" id="success_message"></div>
 
 
 
                                     <div class="row">
 
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left ">
                                             <div class="form-group">
-                                                <strong>Title</strong>
-                                                <input type="text" name="title" class="title form-control" placeholder="email" value="{{old('title')}}">
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Slug</strong>
-                                                <input type="text" name="slug" class="slug form-control" placeholder="slug" value="">
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Slug</strong>
-                                                <input type="text" name="slug" class="slug form-control" placeholder="slug" value="">
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Slug</strong>
-                                                <input type="text" name="slug" class="slug form-control" placeholder="slug" value="">
-
-                                            </div>
-
-                                        </div> <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                                            <div class="form-group">
-                                                <strong>Slug</strong>
-                                                <input type="text" name="slug" class="slug form-control" placeholder="slug" value="">
+                                                <strong>Product name</strong>
+                                                <input type="text" name="name"   id="name" class="name form-control " placeholder="supplier name" >
 
                                             </div>
 
                                         </div>
 
+                                            <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                                                <div class="form-group">
+                                                    <strong>Category</strong>
+                                                    @php
+                                                    $categories = \App\Models\Category::all();
+                                                    @endphp
+                                                    <select name="categories_id" id="categories_id" class="categories_id selectpicker" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                       @forelse($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                        @empty
+                                                            <option value="id">no category</option>
+                                                        @endforelse
+                                                    </select>
 
+                                                </div>
+                                            </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                                            <div class="form-group">
+                                                @php
+                                                $units = \App\Models\Unit::all();
+                                                @endphp
+                                                <strong>Unit</strong>
+                                                <select name="unit_id" id="units_id" class=" selectpicker" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                   @forelse($units as $unit)
+                                                    <option value="{{{$unit->id}}}">{{$unit->name}}</option>
+                                                    @empty
+                                                        <option value="">no unit</option>
 
+                                                    @endforelse
+                                                </select>
 
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                                            <div class="form-group">
+                                                @php
+                                                $suppliers = \App\Models\Supplier::all();
+                                                @endphp
+                                                <strong>Supplier</strong>
+                                                <select name="suppliers_id" id="suppliers_id" class="suppliers_id selectpicker" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                    @forelse($suppliers as $supplier)
+                                                    <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                                    @empty
+                                                        <option value="is">no supplier</option>
 
+                                                    @endforelse
+                                                </select>
 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                            <button type="submit" class="add_product btn btn-primary">Save</button>
+                                        </div>
                                     </div>
 
 
@@ -107,16 +126,14 @@
 
                                     <tbody>
                                     <tr>
-                                        <td>Timothy Mooney</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>37</td>
-                                        <td>2008/12/11</td>
-                                        <td class="text-right">
-                                            <a href="#" class="btn btn-link btn-info like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="btn btn-link btn-warning edit"><i class="fa fa-edit"></i></a>
-                                            <a href="#" class="btn btn-link btn-danger remove"><i class="fa fa-times"></i></a>
-                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button type="button"   class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>
+                                        <td><button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash"></i></button></td>
+
                                     </tr>
                                     </tbody>
                                 </table>
@@ -127,36 +144,36 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 @section('script')
     <script>
         $(document).ready(function () {
-            fetchpost();
-            function fetchpost() {
+            fetchproduct();
+            function  fetchproduct() {
                 $.ajax({
                     type: "GET",
-                    url:"",
+                    url:"/fetch-product/",
                     dataType:"json",
                     success: function (response) {
                         // console.log(response.posts);
 
                         $('tbody').html("");
-                        $.each(response.posts, function (key, item){
+                        $.each(response.products, function (key, item){
                             $('tbody').append('<tr>\
                                             <td>'+item.id+'</td>\
-                                           <td>'+item.title+'</td>\
-                                           <td>'+item.slug+'</td>\
-                                           <td>'+item.image+'</td>\
-                                           <td>'+item.category_id+'</td>\
-                                            <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit"></i></button></td>\
-                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash"></i></button></td>\
+                                           <td>'+item.name+'</td>\
+                                           <td>'+item.suppliers_id+'</td>\
+                                           <td>'+item.units_id+'</td>\
+                                           <td>'+item.categories_id+'</td>\
+                                            <td><button type="button"  value="'+item.id+'" class="edit_post btn btn-primary" ><i class="fa fa-edit">edit</i></button></td>\
+                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash">delete</i></button></td>\
                                             </tr>');
                         });
                     }
                 })
             }
 
-            {{--delete--}}
+
             $(document).on('click', '.delete_post', function (e){
                 e.preventDefault();
 
@@ -195,7 +212,6 @@
 
             });
 
-            {{--edit--}}
             $(document).on('click', '.edit_post', function (e){
                 e.preventDefault();
                 let post_id  = $(this).val();
@@ -228,7 +244,7 @@
 
 
             });
-            {{--update--}}
+
             $(document).on('click', '.update_post', function (e){
                 e.preventDefault();
 
@@ -279,19 +295,17 @@
             });
 
 
-            {{--add post--}}
+         // add product
 
 
             $(document).on('click', '.add_product', function (e){
                 e.preventDefault();
                 // console.log('click');
                 var data = {
-                    'title' : $('.title').val(),
-                    'body' : $('textarea#mytextarea').val(),
                     'name' : $('.name').val(),
-                    'slug' : $('.slug').val(),
-                    'image' : $('.image').attr("src", data),
-                    'category_id' : $('.category_id:checked').val(),
+                    'suppliers_id' : $('#suppliers_id').val(),
+                    'units_id' : $('#units_id').val(),
+                    'categories_id' : $('#categories_id').val(),
                 }
                 // console.log(data);
                 $.ajaxSetup({
@@ -302,10 +316,10 @@
 
                 $.ajax({
                     type: "POST",
-                    url:"/post/",
+                    url:"/post-product/",
                     data:data,
                     dataType:"json",
-                    datType: "image/jpeg",
+
                     success: function (response){
                         // console.log(response);
                         if (response.status == 400)
@@ -319,10 +333,10 @@
                         else{
                             $('#saveform_errList').html("");
                             $('#success_message').addClass("alert  alert-success");
-                            $('#success_message').text("response.message");
+                            $('#success_message').text(response.message);
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
-                            fetchpost();
+                            fetchproduct();
                         }
 
                     }

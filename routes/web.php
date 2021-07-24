@@ -23,6 +23,8 @@ Route::get('/', function () {
 });
 //product
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+Route::post('/post-product', [ProductController::class, 'store']);
+Route::get('/fetch-product', [ProductController::class, 'fetchProduct']);
 //unit
 Route::get('/unit', [UnitController::class, 'index'])->name('unit.index');
 Route::post('/post-unit', [UnitController::class, 'store']);

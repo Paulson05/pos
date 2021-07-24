@@ -310,7 +310,7 @@
                         else{
                             $('#saveform_errList').html("");
                             $('#success_message').addClass("alert  alert-success");
-                            $('#success_message').text("response.message");
+                            $('#success_message').text(response.message);
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
                             fetchproduct();

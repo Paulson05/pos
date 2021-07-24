@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -27,15 +29,42 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'suppliers_id'=>  'required',
+            'units_id' => 'required',
+            'categories_id' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $product = new Product();
+            $product->suppliers_id = $request->suppliers_id;
+            $product->name = $request->name;
+            $product->units_id = $request->units_id;
+            $product->categories_id = $request->categories_id;
+//        $supplier->created_by = Auth::user()->id;
+            $product->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'post added successfully',
+
+            ]);
+        }
+    }
+    public function  fetchProduct(){
+        $products = Product::all();
+        return response()->json([
+            'products'=>$products,
+        ]);
     }
 
     /**
