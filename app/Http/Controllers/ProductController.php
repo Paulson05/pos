@@ -16,7 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.productManagement');
+     $products = Product::with(['category', 'unit', 'supplier'])->get();
+
+        return view('backend.pages.product.index')->with([
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -79,7 +83,7 @@ class ProductController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit()
     {
         $product = Product::find($id);
 

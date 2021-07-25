@@ -49,9 +49,13 @@
                                                     $categories = \App\Models\Category::all();
                                                     @endphp
                                                     <select name="categories_id" id="categories_id" class="categories_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
-                                                       @forelse($categories as $category)
+
+                                                        <option>--select category --</option>
+                                                        @forelse($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                         @empty
+
+
                                                             <option value="id">no category</option>
 
                                                         @endforelse
@@ -66,7 +70,9 @@
                                                 @endphp
                                                 <strong>Unit</strong>
                                                 <select name="unit_id" id="units_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
-                                                   @forelse($units as $unit)
+
+                                                       <option>--select unit --</option>
+                                                    @forelse($units as $unit)
                                                     <option value="{{{$unit->id}}}">{{$unit->name}}</option>
                                                     @empty
                                                         <option value="">no unit</option>
@@ -83,7 +89,9 @@
                                                 @endphp
                                                 <strong>Supplier</strong>
                                                 <select name="suppliers_id" id="suppliers_id" class="suppliers_id form-control" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                        <option>--select supplier --</option>
                                                     @forelse($suppliers as $supplier)
+
                                                     <option value="{{$supplier->id}}">{{$supplier->name}}</option>
                                                     @empty
                                                         <option value="is">no supplier</option>
@@ -230,26 +238,33 @@
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
+                                        <th>S/N</th>
+                                        <th>NAME</th>
+                                        <th>Supplier</th>
+                                        <th>Unit</th>
+                                        <th>Category</th>
+                                        <th>Category</th>
                                         <th class="disabled-sorting text-right">Actions</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
+                                         @foreach($products as $product)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button type="button"   class="edit_product btn btn-primary" ><i class="fa fa-edit"></i></button></td>
-                                        <td><button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash"></i></button></td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->supplier->name}}</td>
+                                        <td>{{$product->unit->id}}</td>
+                                        <td>{{$product->supplier->name}}</td>
+
+                                        <td>
+                                            <button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash">delete</i></button>
+
+                                        <button type="button"   class="edit_product btn btn-primary" ><i class="fa fa-edit">edit</i></button>
+                                        <td>
 
                                     </tr>
+                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -264,30 +279,30 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            fetchproduct();
-            function  fetchproduct() {
-                $.ajax({
-                    type: "GET",
-                    url:"/fetch-product/",
-                    dataType:"json",
-                    success: function (response) {
-                        // console.log(response.posts);
-
-                        $('tbody').html("");
-                        $.each(response.products, function (key, item){
-                            $('tbody').append('<tr>\
-                                            <td>'+item.id+'</td>\
-                                           <td>'+item.name+'</td>\
-                                           <td>'+item.suppliers_id+'</td>\
-                                           <td>'+item.units_id+'</td>\
-                                           <td>'+item.categories_id+'</td>\
-                                            <td><button type="button"  value="'+item.id+'" class="edit_product btn btn-primary" ><i class="fa fa-edit">edit</i></button></td>\
-                                              <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash">delete</i></button></td>\
-                                            </tr>');
-                        });
-                    }
-                })
-            }
+            // fetchproduct();
+            // function  fetchproduct() {
+            //     $.ajax({
+            //         type: "GET",
+            //         url:"/fetch-product/",
+            //         dataType:"json",
+            //         success: function (response) {
+            //             // console.log(response.posts);
+            //
+            //             $('tbody').html("");
+            //             $.each(response.products, function (key, item){
+            //                 $('tbody').append('<tr>\
+            //                                 <td>'+item.id+'</td>\
+            //                                <td>'+item.name+'</td>\
+            //                                <td>'+item.suppliers_id+'</td>\
+            //                                <td>'+item.units_id+'</td>\
+            //                                <td>'+item.categories_id+'</td>\
+            //                                 <td><button type="button"  value="'+item.id+'" class="edit_product btn btn-primary" ><i class="fa fa-edit">edit</i></button></td>\
+            //                                   <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash">delete</i></button></td>\
+            //                                 </tr>');
+            //             });
+            //         }
+            //     })
+            // }
             $(document).on('click', '.add_product', function (e){
                 e.preventDefault();
                 // console.log('click');
@@ -326,7 +341,7 @@
                             $('#success_message').text(response.message);
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
-                            fetchproduct();
+                            // fetchproduct();
                         }
 
                     }
