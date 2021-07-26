@@ -9,15 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-     $products = Product::with(['category', 'unit', 'supplier'])->get();
-
+//     $products = Product::where('units_id', 'suppliers_id', 'categories_id')->with()->get();
+//     $products = Product::all();
+        $products =   Product::with(array('category'=>function($query){
+            $query->select('id','name');
+        }))->get();
         return view('backend.pages.product.index')->with([
             'products' => $products,
         ]);
@@ -39,8 +38,8 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'suppliers_id'=>  'required',
-            'units_id' => 'required',
-            'categories_id' => 'required',
+            'unit_id' => 'required',
+            'category_id' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -52,8 +51,8 @@ class ProductController extends Controller
             $product = new Product();
             $product->suppliers_id = $request->suppliers_id;
             $product->name = $request->name;
-            $product->units_id = $request->units_id;
-            $product->categories_id = $request->categories_id;
+            $product->unit_id = $request->unit_id;
+            $product->category_id = $request->category_id;
 //        $supplier->created_by = Auth::user()->id;
             $product->save();
 

@@ -48,9 +48,9 @@
                                                     @php
                                                     $categories = \App\Models\Category::all();
                                                     @endphp
-                                                    <select name="categories_id" id="categories_id" class="categories_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                    <select name="categories_id" id="category_id" class="category_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
 
-                                                        <option>--select category --</option>
+
                                                         @forelse($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                         @empty
@@ -69,9 +69,9 @@
                                                 $units = \App\Models\Unit::all();
                                                 @endphp
                                                 <strong>Unit</strong>
-                                                <select name="unit_id" id="units_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                <select name="unit_id" id="unit_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
 
-                                                       <option>--select unit --</option>
+
                                                     @forelse($units as $unit)
                                                     <option value="{{{$unit->id}}}">{{$unit->name}}</option>
                                                     @empty
@@ -89,7 +89,7 @@
                                                 @endphp
                                                 <strong>Supplier</strong>
                                                 <select name="suppliers_id" id="suppliers_id" class="suppliers_id form-control" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
-                                                        <option>--select supplier --</option>
+
                                                     @forelse($suppliers as $supplier)
 
                                                     <option value="{{$supplier->id}}">{{$supplier->name}}</option>
@@ -254,8 +254,10 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->supplier->name}}</td>
-                                        <td>{{$product->unit->id}}</td>
-                                        <td>{{$product->supplier->name}}</td>
+                                        <td>{{$product->unit->name}}</td>
+                                        <td>{{$product->category->name}}</td>
+
+{{--                                        <td>{{$product->first()->name}}</td>--}}
 
                                         <td>
                                             <button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash">delete</i></button>
@@ -309,8 +311,8 @@
                 var data = {
                     'name' : $('.name').val(),
                     'suppliers_id' : $('#suppliers_id').val(),
-                    'units_id' : $('#units_id').val(),
-                    'categories_id' : $('#categories_id').val(),
+                    'unit_id' : $('#unit_id').val(),
+                    'category_id' : $('#category_id').val(),
                 }
                 // console.log(data);
                 $.ajaxSetup({
@@ -406,8 +408,8 @@
                         }
                         else{
                             $("#edit_name").val(response.product.name);
-                            $("#edit_categories_id").val(response.product.categories_id);
-                            $("#edit_units_id").val(response.product.units_id);
+                            $("#edit_category_id").val(response.product.category_id);
+                            $("#edit_unit_id").val(response.product.unit_id);
                             $("#edit_suppliers_id").val(response.product.suppliers_id);
                             $("#edit_post_id").val(post_id);
                         }
