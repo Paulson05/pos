@@ -11,13 +11,13 @@ class Product extends Model
     protected $table ='products';
     use HasFactory;
     public function unit(){
-        return $this->belongsTo(Unit::class, 'unit_id');
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
 
     public function supplier(){
-        return $this->belongsTo(Supplier::class, 'suppliers_id');
+        return $this->belongsTo(Supplier::class, 'suppliers_id', 'id');
     }
 public function category(){
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
 }
 }

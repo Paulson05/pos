@@ -50,6 +50,7 @@
                                                     @endphp
                                                     <select name="categories_id" id="category_id" class="category_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
 
+                                                        <option>--select category--</option>
 
                                                         @forelse($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
@@ -71,6 +72,7 @@
                                                 <strong>Unit</strong>
                                                 <select name="unit_id" id="unit_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
 
+                                                    <option>--select unit--</option>
 
                                                     @forelse($units as $unit)
                                                     <option value="{{{$unit->id}}}">{{$unit->name}}</option>
@@ -89,7 +91,7 @@
                                                 @endphp
                                                 <strong>Supplier</strong>
                                                 <select name="suppliers_id" id="suppliers_id" class="suppliers_id form-control" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
-
+                                                    <option>--select supplier--</option>
                                                     @forelse($suppliers as $supplier)
 
                                                     <option value="{{$supplier->id}}">{{$supplier->name}}</option>
@@ -296,8 +298,8 @@
             //                                 <td>'+item.id+'</td>\
             //                                <td>'+item.name+'</td>\
             //                                <td>'+item.suppliers_id+'</td>\
-            //                                <td>'+item.units_id+'</td>\
-            //                                <td>'+item.categories_id+'</td>\
+            //                                <td>'+item.unit_id+'</td>\
+            //                                <td>'+item.category_id+'</td>\
             //                                 <td><button type="button"  value="'+item.id+'" class="edit_product btn btn-primary" ><i class="fa fa-edit">edit</i></button></td>\
             //                                   <td><button type="button" value="'+item.id+'"  class="delete_post btn btn-danger" ><i class="fa fa-trash">delete</i></button></td>\
             //                                 </tr>');
@@ -343,7 +345,7 @@
                             $('#success_message').text(response.message);
                             $('#addModal').modal("hide");
                             $('#addModal').find("input").val("");
-                            // fetchproduct();
+                            fetchproduct();
                         }
 
                     }
@@ -382,7 +384,7 @@
                         $('#success_message').text(response.message);
                         $('#example2Modal').modal("hide");
                         $('.delete_post_btn').text("yes Delete");
-                        fetchproduct();
+                        // fetchproduct();
                     }
 
                 });

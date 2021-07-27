@@ -134,9 +134,9 @@
         </a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link" href="calendar.html">
+        <a class="nav-link" href="{{route('purchase.index')}}">
             <i class="nc-icon nc-single-copy-04"></i>
-            <p>Calendar</p>
+            <p>Purchase</p>
         </a>
     </li>
     <li class="nav-item">

@@ -12,7 +12,7 @@ class ProductController extends Controller
 
     public function index()
     {
-//     $products = Product::where('units_id', 'suppliers_id', 'categories_id')->with()->get();
+//     $products = Product::where('unit_id', 'suppliers_id', 'category_id')->with()->get();
 //     $products = Product::all();
         $products =   Product::with(array('category'=>function($query){
             $query->select('id','name');

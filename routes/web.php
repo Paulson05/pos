@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +63,25 @@ Route::get('/fetchcustomer', [CustomerController::class, 'fetchcustomer']);
 Route::get('/edit-customer/{id}', [CustomerController::class, 'edit']);
 Route::put('/update-customer/{id}', [CustomerController::class, 'update']);
 Route::delete('/delete-customer/{id}', [CustomerController::class, 'destroy']);
+
+//purchase
+
+
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
+Route::post('/post-purchase', [PurchaseController::class, 'store']);
+Route::get('/fetchpurchase', [PurchaseController::class, 'fetchpurchase']);
+Route::get('/edit-purchase/{id}', [PurchaseController::class, 'edit']);
+Route::put('/update-purchase/{id}', [PurchaseController::class, 'update']);
+Route::delete('/delete-purchase/{id}', [PurchaseController::class, 'destroy']);
+Route::delete('/store-purchase', [PurchaseController::class, 'store'])->name('purchase.store');
+
+Route::delete('/pendinglist', [PurchaseController::class, 'pendingList'])->name('purchase-list');
+
+// default
+Route::post('/getCategory', [DefaultController::class, 'getCategory'])->name('getCategory');
+Route::post('/getProduct', [DefaultController::class, 'getProduct'])->name('getProduct');
+
+
 
 
 
