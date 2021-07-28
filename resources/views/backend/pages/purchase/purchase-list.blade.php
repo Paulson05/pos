@@ -237,30 +237,55 @@
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>
                             <div class="fresh-datatables">
-                                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                <table id="datatables" class="table table-striped table-no-bordered table-hover table-responsive" cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>NAME</th>
+                                        <th>date</th>
                                         <th>Supplier</th>
-                                        <th>Unit</th>
+                                        <th>product</th>
                                         <th>Category</th>
-                                        <th>Category</th>
+                                        <th>purchase no</th>
+                                        <th>description</th>
+                                        <th>buying price</th>
+                                        <th>buying qty</th>
+                                        <th>unit price</th>
+                                        <th>status</th>
+                                        <th>created_by</th>
                                         <th class="disabled-sorting text-right">Actions</th>
                                     </tr>
                                     </thead>
                                           @php
-                                          $products  = \App\Models\Product::all()
+                                          $purchases  = \App\Models\Purchase::all()
                                           @endphp
                                     <tbody>
 
-                                    @foreach($products as $product)
+                                    @foreach($purchases as $purchase)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$product->name}}</td>
-                                            <td>{{$product->supplier->name}}</td>
-                                            <td>{{$product->unit->name}}</td>
-                                            <td>{{$product->category->name}}</td>
+                                            <td>{{date('d-m-y', strtotime($purchase->date))}}</td>
+                                            <td>{{$purchase->supplier->name}}</td>
+                                            <td>{{$purchase->product->name}}</td>
+                                            <td>{{$purchase->category->name}}</td>
+                                            <td>{{$purchase->buying_qty}}</td>
+                                            <td>{{$purchase->description}}</td>
+
+                                            <td>{{$purchase->unit_price}}</td>
+                                            <td>{{$purchase->purchase_no}}</td>
+                                            <td>${{$purchase->buying_price}}</td>
+                                            <td>
+                                                @if($purchase->status == '0')
+                                                    <button class=" btn btn-danger">pending</button>
+                                                @elseif($purchase->status == '1')
+                                                    <button class="btn btn-success">approved</button>
+                                                @endif
+                                            </td>
+                                            <td>{{$purchase->created_by}}</td>
+
+
+
+
+
 
                                             {{--                                        <td>{{$product->first()->name}}</td>--}}
 

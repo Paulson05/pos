@@ -14,11 +14,9 @@ use function GuzzleHttp\Promise\all;
 class PurchaseController extends Controller
 {
     public function index(){
-        return view('backend.pages.purchaseManagement');
+        return view('backend.pages.purchase.purchaseManagement');
     }
-    public function purchaseList(){
-        return view('backend.pages.purchase.view-pending-list');
-    }
+
 
     public function store(Request $request)
     {
@@ -40,7 +38,7 @@ class PurchaseController extends Controller
                             $purchase->buying_qty = $request->buying_qty[$i];
                             $purchase->unit_price = $request->unit_price[$i];
                             $purchase->buying_price = $request->buying_price[$i];
-                            $purchase->description = $request->buying_price[$i];
+                            $purchase->description = $request->description[$i];
 
                             $purchase->status = '0';
                             //        $supplier->created_by = Auth::user()->id;
@@ -50,20 +48,23 @@ class PurchaseController extends Controller
                 }
               return redirect()->route('purchase-list');
     }
-
+public function purchaseList(){
+        return view('backend.pages.purchase.purchase-list');
+}
     public function pendingList(){
-        $allData = Purchase::orderBy('date', 'desc')->orderby('id', 'desc')->where('status', '0')->get();
-        return view('backend.pages.purchase.view-pending-list');
+
+        return view('backend.pages.purchase.pending-list');
     }
 
     public function approve($id){
         $purchase = Purchase::find($id);
-        $product =Product::where('id', $purchase->product_id)->first();
-        $purchase_qty = ((float) ($purchase->buying_qty))+((float)($product->quanty));
+        $product =Product::where('id', $purchase->products_id)->first();
+        $purchase_qty = ((float) ($purchase->buying_qty))+((float)($product->quantity));
         $product->quantity = $purchase_qty;
         if ($product->save()){
-            DB::table('purchase')->where('id', $id)->update(['status' => 1]);
+            DB::table('purchases')->where('id', $id)->update(['status' => 1]);
         }
+        return redirect()->route('purchase-list');
     }
     public function  fetchProduct(){
         $products = Purchase::all();

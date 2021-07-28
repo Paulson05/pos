@@ -75,7 +75,11 @@ Route::put('/update-purchase/{id}', [PurchaseController::class, 'update']);
 Route::delete('/delete-purchase/{id}', [PurchaseController::class, 'destroy']);
 Route::post('/store-purchase', [PurchaseController::class, 'store'])->name('purchase.store');
 
-Route::get('/pendinglist', [PurchaseController::class, 'purchaseList'])->name('purchase-list');
+Route::get('/purchaselist', [PurchaseController::class, 'purchaseList'])->name('purchase-list');
+Route::get('/pendinglist', [PurchaseController::class, 'pendingList'])->name('pending.list');
+Route::get('/approved/{id}', [PurchaseController::class, 'approve'])->name('purchase.approve');
+
+
 
 // default
 Route::get('/get-category', [DefaultController::class, 'getCategory'])->name('get-category');

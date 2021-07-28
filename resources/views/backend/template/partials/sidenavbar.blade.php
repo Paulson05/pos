@@ -146,19 +146,19 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('purchase.index')}}">
                         <span class="sidebar-mini">VP</span>
-                        <span class="sidebar-normal">View purchase</span>
+                        <span class="sidebar-normal">purchase</span>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="pages/register.html">
+                    <a class="nav-link" href="{{route('purchase-list')}}">
                         <span class="sidebar-mini">PL</span>
                         <span class="sidebar-normal">Purchase List</span>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="pages/lock.html">
-                        <span class="sidebar-mini">LSP</span>
-                        <span class="sidebar-normal">Lock Screen Page</span>
+                    <a class="nav-link" href="{{route('pending.list')}}">
+                        <span class="sidebar-mini">PL</span>
+                        <span class="sidebar-normal">PendingList</span>
                     </a>
                 </li>
                 <li class="nav-item  ">
