@@ -158,13 +158,13 @@
 
                                             <div class="col-xs-12 col-sm-12 col-md-4 text-left">
                                                 <div class="form-group">
-                                                    <strong>Category</strong>
+                                                    <strong>Category name</strong>
                                                     @php
                                                         $categories = \App\Models\Category::all();
                                                     @endphp
-                                                    <select name="categories_id" id="category_id" class="category_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                    <select name="category_id" id="category_id" class="category_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
 
-
+                                                        <option value="">select category</option>
                                                         @forelse($categories as $category)
                                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                                         @empty
@@ -201,8 +201,9 @@
                                                     @php
                                                         $suppliers = \App\Models\Supplier::all();
                                                     @endphp
-                                                    <strong>Supplier</strong>
+                                                    <strong>Supplier name</strong>
                                                     <select name="suppliers_id" id="suppliers_id" class="suppliers_id form-control" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                        <option>select--suppliers</option>
 
                                                         @forelse($suppliers as $supplier)
 
@@ -219,7 +220,7 @@
                                             <div  class="col-xs-12 col-sm-12 col-md-2 ">
         {{--                                        <button type="submit" class="add_product btn btn-primary">Save</button>--}}
                                                 <div class="mt-4">
-                                                    <a class="btn btn-primary"><i class="fa fa fa-plus">add item</i></a>
+                                                    <a class="btn btn-primary addeventmore"><i class="fa fa fa-plus ">add item</i></a>
 
                                                 </div>
                                             </div>
@@ -236,7 +237,7 @@
                                                             <th width="7%">Pcs/kg</th>
                                                             <th width="10%">Unit Price</th>
                                                             <th>Description</th>
-                                                            <th width="100%">Total Price</th>
+                                                            <th width="10%">Total Price</th>
                                                             <th>Action</th>
                                                         </tr>
                                                         </thead>
@@ -245,11 +246,19 @@
                                                         </tbody>
                                                         <tbody>
                                                         <tr>
-                                                            <td colspan="5"></td>
+                                                            <td colspan="5">
+                                                            <td>
+                                                                <input type="text" name="estimate_amount" value="0" id="estimate_amount" class="form-control form-control-sm text-right estimate_amount" readonly style = "background-color: darkgreen;">
+                                                            </td>
+                                                            <td></td>
                                                         </tr>
                                                         </tbody>
 
                                                     </table>
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <button class="btn btn-primary" type="submit" id="storeButton">purchase store</button>
+                                                    </div>
 
                                                 </form>
                                             </div>
@@ -271,6 +280,36 @@
 
 @endsection
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.7/handlebars.min.js">
+
+    </script>
+    <script id="document-template" type="text/x-handlebars-template">
+<tr class="delete_add_more_item" id="delete_add_more_item">
+    <input type="hidden" name="date[]" value="@{{date}}">
+    <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
+    <input type="hidden" name="suppliers_id[]" value="@{{suppliers_id}}">
+    <td>
+        <input type="hidden" name="category_id[]" value="@{{category_id}}">@{{category_name}}
+    </td>
+    <td>
+        <input type="hidden" name="products_id[]" value="@{{products_id}}">@{{products_name}}
+    </td>
+    <td>
+        <input type="number" min="1" class="form-control form-control-sm text-right buying_qty"  name="buying_qty[]" value="1">
+    </td>
+    <td>
+        <input type="number"  class="form-control form-control-sm text-right unit_price"  name="unit_price[]" value="">
+    </td>
+    <td>
+        <input type="text" class="form-control form-control-sm text-right"  name="description[]">
+    </td>
+    <td>
+        <input type="number"  class="form-control form-control-sm text-right buying_price"  name="buying_price[]" value="0" readonly>
+
+    </td>
+    <td><i class="btn btn-danger fa fa-window-close removeeventmore">delete</i></td>
+</tr>
+    </script>
     <script>
         $(document).ready(function () {
             // fetchproduct();
@@ -477,16 +516,18 @@
     </script>
     <script>
         $(function (){
-            $(document).on('change', '#supplier_id', function (){
-                var supplier_id = $(this).val();
+            $(document).on('change', '#suppliers_id', function (){
+
+                var suppliers_id = $(this).val();
+
                 $.ajax({
                     type: "GET",
-                    url:"",
-                    data:{supplier_id:supplier_id},
+                    url:"{{route('get-category')}}",
+                    data:{suppliers_id:suppliers_id},
                     success:function (data){
                         var html = '<option value="">select category</option>';
-                        $.each(data,function (key, v){
-                            html += '<option value="'+v.categories_id+'">'+v.category.name+'</option>';
+                        $.each(data,function (key,v){
+                            html += '<option value="'+v.category_id+'">'+v.category.name+'</option>';
                         });
                         $('#category_id').html(html);
                     }
@@ -503,26 +544,26 @@
                 var category_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url:"",
-                    data:{supplier_id:supplier_id},
+                    url:"{{route('get-product')}}",
+                    data:{category_id:category_id},
                     success:function (data){
-                        var html = '<option value="">select category</option>';
+                        var html = '<option value="">select product</option>';
                         $.each(data,function (key,v){
-                            html += '<option value="'+v.categories_id+'">'+v.category.name+'</option>';
+                            html += '<option value="'+v.id+'">'+v.name+'</option>';
                         });
-                        $('#category_id').html(html);
+                        $('#products_id').html(html);
                     }
                 });
             });
         });
-
-
-
     </script>
     <script>
         $(document).ready(function (){
             $(document).on("click", ".addeventmore", function (){
+
+
                 var date = $('#date').val()
+
                 var purchase_no = $('#purchase_no').val();
                 var suppliers_id = $('#suppliers_id').val();
                 var supplier_name = $('#suppliers_id').find('option:selected').text();
@@ -553,7 +594,7 @@
                     return false;
                 }
 
-                var source = $('$document-template').html();
+                var source = $('#document-template').html();
                 var template = Handlebars.compile(source);
                 var data = {
                     date:date,
@@ -568,14 +609,17 @@
                 $("#addRow").append(html);
             });
 
-            $(document).on("click", "removeeventmore", function (event){
+            $(document).on("click", ".removeeventmore", function (event){
                 $(this).closest(".delete_add_more_item").remove();
                 totalAmountPrice()
             });
             $(document).on('keyup click', '.unit_price, .buying_qty',function (){
-                var unit_price = $(this).closest("tr").find("input.input_price").val()
+                var unit_price = $(this).closest("tr").find("input.unit_price").val()
+
                 var qty = $(this).closest("tr").find("input.buying_qty").val()
+
                 var total = unit_price * qty;
+
                 $(this).closest("tr").find("input.buying_price").val(total);
                 totalAmountPrice();
             })

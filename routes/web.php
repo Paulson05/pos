@@ -75,11 +75,11 @@ Route::put('/update-purchase/{id}', [PurchaseController::class, 'update']);
 Route::delete('/delete-purchase/{id}', [PurchaseController::class, 'destroy']);
 Route::delete('/store-purchase', [PurchaseController::class, 'store'])->name('purchase.store');
 
-Route::delete('/pendinglist', [PurchaseController::class, 'pendingList'])->name('purchase-list');
+Route::get('/pendinglist', [PurchaseController::class, 'purchaseList'])->name('purchase-list');
 
 // default
-Route::post('/getCategory', [DefaultController::class, 'getCategory'])->name('getCategory');
-Route::post('/getProduct', [DefaultController::class, 'getProduct'])->name('getProduct');
+Route::get('/get-category', [DefaultController::class, 'getCategory'])->name('get-category');
+Route::get('/get-product', [DefaultController::class, 'getProduct'])->name('get-product');
 
 
 

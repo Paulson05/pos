@@ -133,32 +133,26 @@
             <p>Customer</p>
         </a>
     </li>
-    <li class="nav-item ">
-        <a class="nav-link" href="{{route('purchase.index')}}">
-            <i class="nc-icon nc-single-copy-04"></i>
-            <p>Purchase</p>
-        </a>
-    </li>
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
             <i class="nc-icon nc-puzzle-10"></i>
             <p>
-                Pages
+                Purchase Managemnt
                 <b class="caret"></b>
             </p>
         </a>
         <div class="collapse " id="pagesExamples">
             <ul class="nav">
                 <li class="nav-item ">
-                    <a class="nav-link" href="pages/login.html">
-                        <span class="sidebar-mini">LP</span>
-                        <span class="sidebar-normal">Login Page</span>
+                    <a class="nav-link" href="{{route('purchase.index')}}">
+                        <span class="sidebar-mini">VP</span>
+                        <span class="sidebar-normal">View purchase</span>
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="pages/register.html">
-                        <span class="sidebar-mini">RP</span>
-                        <span class="sidebar-normal">Register Page</span>
+                        <span class="sidebar-mini">PL</span>
+                        <span class="sidebar-normal">Purchase List</span>
                     </a>
                 </li>
                 <li class="nav-item ">

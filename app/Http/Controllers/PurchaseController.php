@@ -15,6 +15,9 @@ class PurchaseController extends Controller
     public function index(){
         return view('backend.pages.purchaseManagement');
     }
+    public function purchaseList(){
+        return view('backend.pages.purchase.view-pending-list');
+    }
 
     public function store(Request $request)
     {
