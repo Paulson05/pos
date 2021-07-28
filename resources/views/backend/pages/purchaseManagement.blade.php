@@ -156,6 +156,46 @@
 
                                             </div>
 
+
+                                            <div class="col-xs-12 col-sm-12 col-md-4 text-left">
+                                                <div class="form-group">
+                                                    @php
+                                                        $suppliers = \App\Models\Supplier::all();
+                                                    @endphp
+                                                    <strong>Supplier name</strong>
+                                                    <select name="suppliers_id" id="suppliers_id" class="suppliers_id form-control" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+                                                        <option>select--suppliers</option>
+
+                                                        @forelse($suppliers as $supplier)
+
+                                                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                                        @empty
+                                                            <option value="is">no supplier</option>
+
+                                                        @endforelse
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                                                <div class="form-group">
+                                                    @php
+                                                        $products = \App\Models\Product::all();
+                                                    @endphp
+                                                    <strong>Product name</strong>
+                                                    <select name="products_id" id="products_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+
+                                                     <option>--select--option</option>
+                                                        @forelse($products as $product)
+                                                            <option value="{{$product->id}}">{{$product->name}}</option>
+                                                        @empty
+                                                            <option value="">no product</option>
+
+                                                        @endforelse
+                                                    </select>
+
+                                                </div>
+                                            </div>
                                             <div class="col-xs-12 col-sm-12 col-md-4 text-left">
                                                 <div class="form-group">
                                                     <strong>Category name</strong>
@@ -177,45 +217,6 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6 text-left">
-                                                <div class="form-group">
-                                                    @php
-                                                        $products = \App\Models\Product::all();
-                                                    @endphp
-                                                    <strong>Product name</strong>
-                                                    <select name="products_id" id="products_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
-
-                                                     <option>--select--option</option>
-                                                        @forelse($products as $product)
-                                                            <option value="{{{$product->id}}}">{{$product->name}}</option>
-                                                        @empty
-                                                            <option value="">no product</option>
-
-                                                        @endforelse
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-4 text-left">
-                                                <div class="form-group">
-                                                    @php
-                                                        $suppliers = \App\Models\Supplier::all();
-                                                    @endphp
-                                                    <strong>Supplier name</strong>
-                                                    <select name="suppliers_id" id="suppliers_id" class="suppliers_id form-control" data-title="Single Select" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
-                                                        <option>select--suppliers</option>
-
-                                                        @forelse($suppliers as $supplier)
-
-                                                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                                        @empty
-                                                            <option value="is">no supplier</option>
-
-                                                        @endforelse
-                                                    </select>
-
-                                                </div>
-                                            </div>
 
                                             <div  class="col-xs-12 col-sm-12 col-md-2 ">
         {{--                                        <button type="submit" class="add_product btn btn-primary">Save</button>--}}
@@ -227,7 +228,7 @@
                                             </div>
                                         <div  class="col-md-12">
                                             <div class="card-body data-tables">
-                                                <form method="post" action="{{route('purchase.store')}}" id="myForm">
+                                                <form method="POST" action="{{route('purchase.store')}}" id="myForm">
                                                     @csrf
                                                     <table class="table-sm table-bordered" width="100%">
                                                         <thead>
@@ -307,7 +308,7 @@
         <input type="number"  class="form-control form-control-sm text-right buying_price"  name="buying_price[]" value="0" readonly>
 
     </td>
-    <td><i class="btn btn-danger fa fa-window-close removeeventmore">delete</i></td>
+    <td><i class="btn btn-danger fa fa-window-close removeeventmore">x</i></td>
 </tr>
     </script>
     <script>
@@ -566,7 +567,6 @@
 
                 var purchase_no = $('#purchase_no').val();
                 var suppliers_id = $('#suppliers_id').val();
-                var supplier_name = $('#suppliers_id').find('option:selected').text();
                 var category_id = $('#category_id').val();
                 var category_name= $('#category_id').find('option:selected').text();
                 var products_id = $('#products_id').val();
@@ -600,6 +600,7 @@
                     date:date,
                     purchase_no:purchase_no,
                     suppliers_id:suppliers_id,
+                    category_id:category_id,
                     category_name:category_name,
                     products_id:products_id,
                     products_name:products_name

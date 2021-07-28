@@ -84,7 +84,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="/scripts/js/jquery.min.js"></script>
 <script src="/bootstrap/js/notify.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.7/handlebars.min.js">
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.7/handlebars.min.js">--}}
+    <script src="{{asset('backend/assets/js/handlebar.min.js')}}">
+
 
 </script>
 @yield('script')
