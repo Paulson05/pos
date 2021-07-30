@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
@@ -74,11 +75,16 @@ Route::get('/edit-purchase/{id}', [PurchaseController::class, 'edit']);
 Route::put('/update-purchase/{id}', [PurchaseController::class, 'update']);
 Route::delete('/delete-purchase/{id}', [PurchaseController::class, 'destroy']);
 Route::post('/store-purchase', [PurchaseController::class, 'store'])->name('purchase.store');
-
 Route::get('/purchaselist', [PurchaseController::class, 'purchaseList'])->name('purchase-list');
 Route::get('/pendinglist', [PurchaseController::class, 'pendingList'])->name('pending.list');
 Route::get('/approved/{id}', [PurchaseController::class, 'approve'])->name('purchase.approve');
 
+// invoice
+Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+Route::get('/invoice/list', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
+Route::get('/get-stock', [DefaultController::class, 'getStock'])->name('check-product-stock');
+Route::post('invoice/store',[InvoiceController::class, 'store'])->name('invoice.store');
+Route::get('invoice/add',[InvoiceController::class, 'add'])->name('invoice.add');
 
 
 // default

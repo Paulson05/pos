@@ -51,7 +51,7 @@
         <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
             <i class="nc-icon nc-app"></i>
             <p>
-             Product
+          Manage   Product
                 <b class="caret"></b>
             </p>
         </a>
@@ -60,7 +60,7 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('product.index')}}">
                         <span class="sidebar-mini">PM</span>
-                        <span class="sidebar-normal">Product Management</span>
+                        <span class="sidebar-normal">Manage Product</span>
                     </a>
                 </li>
 
@@ -72,7 +72,7 @@
         <a class="nav-link" data-toggle="collapse" href="#formsExamples">
             <i class="nc-icon nc-notes"></i>
             <p>
-                Unit
+                Manage   Unit
                 <b class="caret"></b>
             </p>
         </a>
@@ -91,7 +91,7 @@
         <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
             <i class="nc-icon nc-paper-2"></i>
             <p>
-                Category
+                Manage Category
                 <b class="caret"></b>
             </p>
         </a>
@@ -100,7 +100,7 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('category.index')}}">
                         <span class="sidebar-mini">CM</span>
-                        <span class="sidebar-normal">Category Management</span>
+                        <span class="sidebar-normal"> Manage Category </span>
                     </a>
                 </li>
 
@@ -111,7 +111,7 @@
         <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
             <i class="nc-icon nc-pin-3"></i>
             <p>
-             Supplier
+            Manage Supplier
                 <b class="caret"></b>
             </p>
         </a>
@@ -130,14 +130,14 @@
     <li class="nav-item ">
         <a class="nav-link" href="{{route('customer.index')}}">
             <i class="nc-icon nc-chart-bar-32"></i>
-            <p>Customer</p>
+            <p>Manage Customer</p>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
             <i class="nc-icon nc-puzzle-10"></i>
             <p>
-                Purchase Managemnt
+                Manage Purchase
                 <b class="caret"></b>
             </p>
         </a>
@@ -161,18 +161,40 @@
                         <span class="sidebar-normal">PendingList</span>
                     </a>
                 </li>
-                <li class="nav-item  ">
-                    <a class="nav-link" href="pages/user.html">
-                        <span class="sidebar-mini">UP</span>
-                        <span class="sidebar-normal">User Page</span>
+
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#pages3Examples">
+            <i class="nc-icon nc-puzzle-10"></i>
+            <p>
+                Manage invoice
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse " id="pages3Examples">
+            <ul class="nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('invoice.index')}}">
+                        <span class="sidebar-mini">VI</span>
+                        <span class="sidebar-normal">view Invoice</span>
                     </a>
                 </li>
-                <li class="nav-item  ">
-                    <a class="nav-link" href="#lbd">
-                        <span class="sidebar-mini">MCS</span>
-                        <span class="sidebar-normal">More coming soon...</span>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('invoice.list')}}">
+                        <span class="sidebar-mini">IL</span>
+                        <span class="sidebar-normal">Invoice List</span>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="">
+                        <span class="sidebar-mini">PL</span>
+                        <span class="sidebar-normal">Approval invoice</span>
+                    </a>
+                </li>
+
+
             </ul>
         </div>
     </li>
