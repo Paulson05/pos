@@ -249,21 +249,23 @@
                                     </tr>
                                     </thead>
                                           @php
-                                          $purchases  = \App\Models\Purchase::all()
+                                          $invoices = \App\Models\invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->get();
                                           @endphp
                                     <tbody>
 
-                                    @foreach($purchases as $purchase)
+                                    @foreach($invoices as $invoice)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{date('d-m-y', strtotime($purchase->date))}}</td>
-                                            <td>{{$purchase->supplier->name}}</td>
-                                            <td>{{$purchase->purchase_no}}</td>
-                                            <td>{{$purchase->description}}</td>
                                             <td>
-                                                @if($purchase->status == '0')
+                                                {{$invoice['payment']['customer']['name']}}
+                                                {{$invoice->payment->customer->mobile_no}}-  {{$invoice->payment->customer->address}}
+                                            </td>
+                                            <td>{{date('d-m-y', strtotime($invoice->date))}}</td>
+                                            <td>{{$invoice->description}}</td>
+                                            <td>
+                                                @if($invoice->status == '0')
                                                     <button class=" btn btn-danger">pending</button>
-                                                @elseif($purchase->status == '1')
+                                                @elseif($invoice->status == '1')
                                                     <button class="btn btn-success">approved</button>
                                                 @endif
                                             </td>

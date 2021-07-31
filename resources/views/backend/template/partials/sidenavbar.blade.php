@@ -177,8 +177,8 @@
             <ul class="nav">
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('invoice.index')}}">
-                        <span class="sidebar-mini">VI</span>
-                        <span class="sidebar-normal">view Invoice</span>
+                        <span class="sidebar-mini">CI</span>
+                        <span class="sidebar-normal">create Invoice</span>
                     </a>
                 </li>
                 <li class="nav-item ">

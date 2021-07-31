@@ -28,7 +28,8 @@ class InvoiceController extends Controller
 
             $data['invoice_no'] = $invoice_data+1;
         }
-
+        $data['customers'] = Customer::all();
+        $data['date'] = date('y-m-d');
         return view('backend.pages.invoice.index', $data);
     }
     public function invoiceList(){
@@ -70,15 +71,15 @@ class InvoiceController extends Controller
                             $invoice_details->status= '1';
                             $invoice_details->save();
                         }
-                        if ($request->customer_id == '0'){
+                        if ($request->customers_id == '0'){
                             $customer = new Customer();
                             $customer->name = $request->name;
                             $customer->mobile_no = $request->mobile_no;
                             $customer->address = $request->address;
                             $customer->save();
-                            $customer_id =$request->customer_id ;
+                            $customers_id =$request->customers_id ;
                         }else{
-                            $customer_id =$request->customer_id ;
+                            $customers_id =$request->customers_id ;
 
                         }
                         $payment = new payment();
@@ -110,6 +111,7 @@ class InvoiceController extends Controller
                 });
             }
         }
-
+        return redirect()->route('invoice.index');
     }
+
 }

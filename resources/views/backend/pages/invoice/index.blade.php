@@ -605,7 +605,7 @@
 
                 var date = $('#date').val()
 
-                var purchase_no = $('#purchase_no').val();
+                var invoice_no = $('#invoice_no').val();
                 var suppliers_id = $('#suppliers_id').val();
                 var category_id = $('#category_id').val();
                 var category_name= $('#category_id').find('option:selected').text();
@@ -616,7 +616,7 @@
                     $.notify("date is required", {getCaretGlobalPosition: 'top right', classname:  'error'});
                     return false;
                 }
-                if (purchase_no== ''){
+                if (invoice_no== ''){
                     $.notify("purchase is required", {getCaretGlobalPosition: 'top right', classname:  'error'});
                     return false;
                 }

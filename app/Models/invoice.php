@@ -11,18 +11,8 @@ class invoice extends Model
     protected $guarded = [];
     protected $table = 'invoice';
 
-    public function unit(){
-        return $this->belongsTo(Unit::class, 'unit_id', 'id');
+    public function payment(){
+        return $this->belongsTo(payment::class, 'id', 'invoice_id');
     }
 
-    public function supplier(){
-        return $this->belongsTo(Supplier::class, 'suppliers_id', 'id');
-    }
-    public function category(){
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
-    public function customers(){
-        return $this->belongsTo(Customer::class, 'customers_id', 'id');
-
-    }
 }
