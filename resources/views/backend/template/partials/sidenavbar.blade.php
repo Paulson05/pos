@@ -188,6 +188,12 @@
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link" href="{{route('invoicepending.list')}}">
+                        <span class="sidebar-mini">IPL</span>
+                        <span class="sidebar-normal">Invoice Pending List</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link" href="">
                         <span class="sidebar-mini">PL</span>
                         <span class="sidebar-normal">Approval invoice</span>

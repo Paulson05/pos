@@ -82,6 +82,8 @@ Route::get('/approved/{id}', [PurchaseController::class, 'approve'])->name('purc
 // invoice
 Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
 Route::get('/invoice/list', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
+Route::get('/invoice/pendinglist', [InvoiceController::class, 'pendingList'])->name('invoicepending.list');
+
 Route::get('/get-stock', [DefaultController::class, 'getStock'])->name('check-product-stock');
 Route::post('invoice/store',[InvoiceController::class, 'store'])->name('invoice.store');
 Route::get('invoice/add',[InvoiceController::class, 'add'])->name('invoice.add');

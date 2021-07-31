@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class payment extends Model
 {
+    protected $guarded = [];
+    protected $table = 'payments';
     use HasFactory;
 }

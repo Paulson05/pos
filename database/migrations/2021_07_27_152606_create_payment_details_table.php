@@ -16,7 +16,7 @@ class CreatePaymentDetailsTable extends Migration
         Schema::create('payment_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('invoice_id');
-            $table->double('currrent_paid_amount')->nullable();
+            $table->double('current_paid_amount')->nullable();
             $table->date('date')->nullable();
             $table->integer('update_by')->nullable();
             $table->timestamps();

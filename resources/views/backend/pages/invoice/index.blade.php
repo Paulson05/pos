@@ -219,7 +219,7 @@
                                       </div>
                                         <div  class="col-md-12">
                                             <div class="card-body data-tables">
-                                                <form method="POST" action="{{route('purchase.store')}}" id="myForm">
+                                                <form method="POST" action="{{route('invoice.store')}}" id="myForm">
                                                     @csrf
                                                     <table class="table-sm table-bordered" width="100%">
                                                         <thead>
@@ -237,14 +237,14 @@
                                                         </tbody>
                                                         <tbody>
                                                         <tr>
-                                                            <td colspan="4">Discount</td>
+                                                            <td colspan="4" class="text-right">Discount</td>
                                                             <td>
                                                                 <input type="text" name="discount_amount" id="discount_amount" class="form" placeholder="enter discount">
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4">
-                                                            <td>
+                                                            <td class="text-right" colspan="4">grand total</td>
+                                                                <td>
                                                                 <input type="text" name="estimate_amount" value="0" id="estimate_amount" class="form-control form-control-sm text-right estimate_amount" readonly style = "background-color: darkgreen;">
                                                             </td>
                                                             <td></td>
@@ -266,7 +266,7 @@
                                                                <option>select status</option>
                                                                <option>Full paid</option>
                                                                <option>full due</option>
-                                                               <option>spartical paid</option>
+                                                               <option>partical paid</option>
                                                            </select>
                                                            <input type="text" name="paid_amount" class="form-control paid_amount" placeholder="enter paid amount" style="display: none;">
                                                        </div>

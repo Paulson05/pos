@@ -18,10 +18,12 @@ class CreateInvoiceDetailsTable extends Migration
             $table->integer('invoice_id');
             $table->integer('category_id');
             $table->integer('products_id');
+            $table->date('date')->nullable();
             $table->double('selling_qty');
             $table->double('unit_price');
             $table->double('selling_price');
             $table->tinyInteger('status')->default(1);
+            $table->timestamps();
         });
     }
 
