@@ -57,6 +57,7 @@ public function purchaseList(){
     }
 
     public function approve($id){
+
         $purchase = Purchase::find($id);
         $product =Product::where('id', $purchase->products_id)->first();
         $purchase_qty = ((float) ($purchase->buying_qty))+((float)($product->quantity));
@@ -66,6 +67,11 @@ public function purchaseList(){
         }
         return redirect()->route('purchase-list');
     }
+
+
+
+
+
     public function  fetchProduct(){
         $products = Purchase::all();
         return response()->json([

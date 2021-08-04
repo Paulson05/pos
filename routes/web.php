@@ -77,16 +77,20 @@ Route::delete('/delete-purchase/{id}', [PurchaseController::class, 'destroy']);
 Route::post('/store-purchase', [PurchaseController::class, 'store'])->name('purchase.store');
 Route::get('/purchaselist', [PurchaseController::class, 'purchaseList'])->name('purchase-list');
 Route::get('/pendinglist', [PurchaseController::class, 'pendingList'])->name('pending.list');
-Route::get('/approved/{id}', [PurchaseController::class, 'approve'])->name('purchase.approve');
+Route::get('/approved/purchase/{id}', [PurchaseController::class, 'approve'])->name('purchase.approve');
 
 // invoice
 Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
-Route::get('/invoice/list', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
-Route::get('/invoice/pendinglist', [InvoiceController::class, 'pendingList'])->name('invoicepending.list');
+Route::get('/invoice/pending', [InvoiceController::class, 'invoiceList'])->name('invoice.list');
+//Route::get('/invoiceapproval', [InvoiceController::class, 'pendingList'])->name('invoicepending.list');
 
 Route::get('/get-stock', [DefaultController::class, 'getStock'])->name('check-product-stock');
 Route::post('invoice/store',[InvoiceController::class, 'store'])->name('invoice.store');
 Route::get('invoice/add',[InvoiceController::class, 'add'])->name('invoice.add');
+Route::get('/approved/invoice/{id}', [InvoiceController::class, 'approve'])->name('invoice.approve');
+Route::post('approval/store/{id}',[InvoiceController::class, 'approvelStore'])->name('approval.store');
+
+
 
 
 // default

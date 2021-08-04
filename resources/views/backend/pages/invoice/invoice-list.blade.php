@@ -241,11 +241,13 @@
                                     <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Date</th>
-                                        <th>Customer name</th>
-                                        <th>Invoice no</th>
+                                        <th>Name</th>
+
+                                        <th>Invoice No</th>
+                                        <th>date</th>
                                         <th>Description</th>
-                                        <th class="disabled-sorting text-right">Actions</th>
+                                        <th>status</th>
+
                                     </tr>
                                     </thead>
                                           @php
@@ -260,6 +262,7 @@
                                                 {{$invoice['payment']['customer']['name']}}
                                                 {{$invoice->payment->customer->mobile_no}}-  {{$invoice->payment->customer->address}}
                                             </td>
+                                            <td>#{{$invoice->invoice_no}}</td>
                                             <td>{{date('d-m-y', strtotime($invoice->date))}}</td>
                                             <td>{{$invoice->description}}</td>
                                             <td>
@@ -270,10 +273,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button type="button"   class="delete_post btn btn-primary" ><i class="fa fa-trash">delete</i></button>
-
-                                                <button type="button"   class="edit_product btn btn-primary" ><i class="fa fa-edit">edit</i></button>
+                                                @if($invoice->status == '0')
+                                                    <a href="{{route('invoice.approve', $invoice->id)}}"><i>approved</i></a>
+                                            @endif
                                             <td>
+
 
                                         </tr>
                                     @endforeach

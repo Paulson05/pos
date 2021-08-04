@@ -290,8 +290,8 @@
                                             {{--                                        <td>{{$product->first()->name}}</td>--}}
 
                                             <td>
-                                                @if($purchase->status == '0')
-                                                <a href="{{route('purchase.approve', $purchase->id)}}"><i>approved</i></a>
+                                                      @if($purchase->status == '0')
+                                                    <a href="{{route('purchase.approve', $purchase->id)}}"><i>approved</i></a>
                                                     @endif
                                             <td>
 

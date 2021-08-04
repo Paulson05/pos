@@ -114,4 +114,16 @@ class InvoiceController extends Controller
         return redirect()->route('invoice.index');
     }
 
+    public function approve($id){
+
+        $invoice = invoice::with(['invoicedetails'])->find($id);
+
+        return view('backend.pages.invoice.invoice-approved')->with([
+            'invoice'=> $invoice,
+        ]);
+    }
+   public  function approvelStore(Request $request, $id){
+        dd('ok');
+   }
 }
+
