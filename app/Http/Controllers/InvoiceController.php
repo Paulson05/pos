@@ -8,8 +8,10 @@ use App\Models\invioceDetail;
 use App\Models\invoice;
 use App\Models\payment;
 use App\Models\paymentDetails;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -123,7 +125,30 @@ class InvoiceController extends Controller
         ]);
     }
    public  function approvelStore(Request $request, $id){
-        dd('ok');
+
+        foreach ($request->selling_qty as $key => $val){
+            $invoice_details = invioceDetail::where('id', $key)->first();
+            $product = Product::where('id', $invoice_details->products_id)->first();
+            if($product->quantity < $request->selling_qty[$key]){
+                return redirect()->back()->with('error', 'sorry  you approved maximun value ');
+            }
+        }
+
+        $invoice = invoice::find($id);
+//        $invoice->approved_by = Auth::user()->id;
+       $invoice->status = '1';
+       DB::transaction(function () use ($request, $invoice, $id){
+           foreach ($request->selling_qty as $key => $val){
+                      $invoice_details = invioceDetail::where('id', $key)->first();
+                      $invoice_details->status = '1';
+                      $invoice_details->save();
+                      $product = Product::where('id', $invoice_details->products_id)->first();
+                      $product->quantity = ((float)$product->quantity)-((float)$request->selling_qty[$key]);
+                      $product->save();
+           }
+           $invoice->save();
+       });
+       return redirect()->route('invoice.index')->with('succcess', 'successfully approved');
    }
 }
 
