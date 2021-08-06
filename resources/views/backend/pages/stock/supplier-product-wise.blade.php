@@ -47,10 +47,10 @@
 
 
                                     </div>
-                                    <div class="row justify-content-center show_supplier" style="display: none;">
-                                        <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="row justify-content-center " >
+                                        <div class="col-xs-12 col-sm-12 col-md-6 show_supplier" style="display: none;">
                                             <div class="form-group">
-                                                <form action="{{route('supplier.product.wise.report.pdf')}}" method="GET" id="supplierwiseform">
+                                                <form action="{{route('supplier.wise.report.pdf')}}" method="GET" id="supplierwiseform">
                                                 @php
                                                     $suppliers = \App\Models\Supplier::all();
                                                 @endphp
@@ -71,6 +71,60 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        <div>
+
+                                        </div>
+                                    <div class="container show_product " style="display: none;">
+                                        <form method="GET" action="{{route('product.wise.report.pdf')}}">
+                                            @csrf
+                                            <div class="form-row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                                                    <div class="form-group">
+                                                        <strong>Category name</strong>
+                                                        @php
+                                                            $categories = \App\Models\Category::all();
+                                                        @endphp
+                                                        <select name="category_id" id="category_id" class="category_id form-control" data-title="Single Category" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+
+                                                            <option value="">select category</option>
+                                                            @forelse($categories as $category)
+                                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                            @empty
+
+
+                                                                <option value="id">no category</option>
+
+                                                            @endforelse
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                                                    <div class="form-group">
+                                                        @php
+                                                            $products = \App\Models\Product::all();
+                                                        @endphp
+                                                        <strong>Product name</strong>
+                                                        <select name="products_id" id="products_id" class="form-control" data-title="Single Unit" data-style="btn-default btn-outline" data-menu-style="dropdown-blue">
+
+                                                            <option>--select--option</option>
+                                                            @forelse($products as $product)
+                                                                <option value="{{$product->id}}">{{$product->name}}</option>
+                                                            @empty
+                                                                <option value="">no product</option>
+
+                                                            @endforelse
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button class="btn btn-success">search</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                     </div>
                                 </div>
 
@@ -106,17 +160,33 @@
             else {
                 $('.show_supplier').hide();
             }
-        });
-
-        $(document).on('change', '#customers_id', function (){
-
-            var customers_id = $(this).val();
-            if (customers_id == '0'){
-                $('.new_customer').show();
+            if (search_value == 'product_wise'){
+                $('.show_product').show();
             }
             else {
-                $('.new_customer').hide();
+                $('.show_product').hide();
             }
+        });
+    </script>
+
+    <script>
+        $(function (){
+            $(document).on('change', '#category_id', function (){
+
+                var category_id = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url:"{{route('get-product')}}",
+                    data:{category_id:category_id},
+                    success:function (data){
+                        var html = '<option value="">select product</option>';
+                        $.each(data,function (key,v){
+                            html += '<option value="'+v.id+'">'+v.name+'</option>';
+                        });
+                        $('#products_id').html(html);
+                    }
+                });
+            });
         });
     </script>
 @endsection

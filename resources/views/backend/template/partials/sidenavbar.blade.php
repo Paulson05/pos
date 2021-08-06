@@ -229,9 +229,9 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{route('supplier.product.wise.report')}}">
+                    <a class="nav-link" href="{{route('supplier.wise.report')}}">
                         <span class="sidebar-mini">SPW</span>
-                        <span class="sidebar-normal">Supplie/Product wise</span>
+                        <span class="sidebar-normal">Supplier/Product wise</span>
                     </a>
                 </li>
             </ul>
