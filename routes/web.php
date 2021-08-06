@@ -62,9 +62,13 @@ Route::delete('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
 Route::post('/post-customer', [CustomerController::class, 'store']);
 Route::get('/fetchcustomer', [CustomerController::class, 'fetchcustomer']);
+
 Route::get('/edit-customer/{id}', [CustomerController::class, 'edit']);
 Route::put('/update-customer/{id}', [CustomerController::class, 'update']);
 Route::delete('/delete-customer/{id}', [CustomerController::class, 'destroy']);
+Route::get('/customer-report', [CustomerController::class, 'customerReport'])->name('customer.report');
+Route::get('/customer-report/pdf', [CustomerController::class, 'customerReportPdf'])->name('customer.report.pdf');
+
 
 //purchase
 
@@ -79,6 +83,8 @@ Route::post('/store-purchase', [PurchaseController::class, 'store'])->name('purc
 Route::get('/purchaselist', [PurchaseController::class, 'purchaseList'])->name('purchase-list');
 Route::get('/pendinglist', [PurchaseController::class, 'pendingList'])->name('pending.list');
 Route::get('/approved/purchase/{id}', [PurchaseController::class, 'approve'])->name('purchase.approve');
+Route::get('/daily/purchase/report', [PurchaseController::class, 'dailyPurchaseReport'])->name('daily.purchase.report');
+Route::get('/purchase/daily-report/pdf', [PurchaseController::class, 'DailyPurchasePdf'])->name('daily.purchase.report.pdf');
 
 // invoice
 Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');

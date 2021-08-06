@@ -127,12 +127,33 @@
             </ul>
         </div>
     </li>
-    <li class="nav-item ">
-        <a class="nav-link" href="{{route('customer.index')}}">
-            <i class="nc-icon nc-chart-bar-32"></i>
-            <p>Manage Customer</p>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#maps2Examples">
+            <i class="nc-icon nc-pin-3"></i>
+            <p>
+                Manage customer
+                <b class="caret"></b>
+            </p>
         </a>
+        <div class="collapse " id="maps2Examples">
+            <ul class="nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('customer.index')}}">
+                        <i class="nc-icon nc-chart-bar-32"></i>
+                        <p>View Customer</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('customer.report')}}">
+                        <i class="nc-icon nc-chart-bar-32"></i>
+                        <p>Credit Customer Report</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
             <i class="nc-icon nc-puzzle-10"></i>
@@ -159,6 +180,12 @@
                     <a class="nav-link" href="{{route('pending.list')}}">
                         <span class="sidebar-mini">PL</span>
                         <span class="sidebar-normal">PendingList</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('daily.purchase.report')}}">
+                        <span class="sidebar-mini">DP</span>
+                        <span class="sidebar-normal">Daily Purschase</span>
                     </a>
                 </li>
 

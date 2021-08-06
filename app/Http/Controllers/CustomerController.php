@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +16,19 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.customerManagement');
+        return view('backend.pages.customer.customerManagement');
+    }
+    public function customerReport(){
+       $customer = payment::whereIn('paid_status', ['Full paid', 'partial_paid'])->get();
+        return view('backend.pages.customer.creadit-customer-report')->with([
+            'customer' => $customer,
+        ]);
+    }
+
+    public  function customerReportPdf(){
+        $data['customer'] = payment::whereIn('paid_status', ['Full paid', 'partial_paid'])->get();
+        $pdf = \PDF::loadView('backend.pages.pdf.credit-customer-report-pdf',$data);
+        return $pdf->stream('invoice.pdf');
     }
 
     /**
