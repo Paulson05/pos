@@ -100,6 +100,9 @@ Route::get('/invoice/daily-report/pdf', [InvoiceController::class, 'DailyInvoice
 
 Route::get('/stock/report', [StockController::class, 'stockReport'])->name('stock.report');
 Route::get('/stock/daily-report/pdf', [StockController::class, 'StockReportPdf'])->name('stock.report.pdf');
+Route::get('/report/supplier/product/wise', [StockController::class, 'supplierProductWiseReport'])->name('supplier.product.wise.report');
+Route::get('/report/supplier/product/wise/pdf', [StockController::class, 'supplierProductWiseReportPdf'])->name('supplier.product.wise.report.pdf');
+
 
 // default
 Route::get('/get-category', [DefaultController::class, 'getCategory'])->name('get-category');

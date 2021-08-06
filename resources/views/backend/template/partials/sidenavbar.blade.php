@@ -228,6 +228,12 @@
                         <span class="sidebar-normal">view  stock</span>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('supplier.product.wise.report')}}">
+                        <span class="sidebar-mini">SPW</span>
+                        <span class="sidebar-normal">Supplie/Product wise</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </li>
