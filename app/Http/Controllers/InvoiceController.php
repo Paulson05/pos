@@ -70,7 +70,7 @@ class InvoiceController extends Controller
                             $invoice_details->selling_qty = $request->selling_qty[$i];
                             $invoice_details->unit_price = $request->unit_price[$i];
                             $invoice_details->selling_price = $request->selling_price[$i];
-                            $invoice_details->status= '1';
+                            $invoice_details->status= '0';
                             $invoice_details->save();
                         }
                         if ($request->customers_id == '0'){

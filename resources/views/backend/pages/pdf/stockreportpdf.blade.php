@@ -44,17 +44,25 @@
                 <th>Supplier name</th>
                 <th>Category</th>
                 <th>product</th>
+                <th>In.Qty</th>
+                <th>Out.Qty</th>
                 <th>Stock</th>
                 <th>unit</th>
             </tr>
             </thead>
             <tbody>
             @foreach($products as $product)
+                @php
+                    $buying_total = \App\Models\Purchase::where('category_id', $product->category_id)->where('products_id',$product->id)->where('status', '1')->sum('buying_qty');
+                     $selling_total = \App\Models\invioceDetail::where('category_id',  $product->category_id)->where('products_id',$product->id)->where('status', '1')->sum('selling_qty')
+                @endphp
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$product->supplier->name}}</td>
                     <td>{{$product->category->name}}</td>
                     <td>{{$product->name}}</td>
+                    <td>{{$buying_total}}</td>
+                    <td>{{$selling_total}}</td>
                     <td>{{$product->quantity}}</td>
                     <td>{{$product->unit->name}}</td>
 

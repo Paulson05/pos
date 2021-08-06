@@ -32,6 +32,8 @@ public function productWiseReportPdf(Request $request){
     $data['product'] =  Product::where('category_id',$request->category_id)->where('id',$request->products_id)->first();
 
     $pdf = \PDF::loadView('backend.pages.pdf.productwisestockreportpdf',$data);
-    return $pdf->stream('invoice.pdf');
+    return $pdf->stream('invoice.pdf');}
 }
-}
+
+
+
