@@ -6,6 +6,7 @@ use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -89,9 +90,16 @@ Route::post('invoice/store',[InvoiceController::class, 'store'])->name('invoice.
 Route::get('invoice/add',[InvoiceController::class, 'add'])->name('invoice.add');
 Route::get('/approved/invoice/{id}', [InvoiceController::class, 'approve'])->name('invoice.approve');
 Route::post('approval/store/{id}',[InvoiceController::class, 'approvelStore'])->name('approval.store');
+Route::get('/print/list', [InvoiceController::class, 'printInvoiceList'])->name('invoice.print-list');
+Route::get('/print/{id}', [InvoiceController::class, 'printInvoice'])->name('invoice.print');
+Route::get('/invoice/daily', [InvoiceController::class, 'DailyInvoice'])->name('invoice.daily.report');
+Route::get('/invoice/daily-report/pdf', [InvoiceController::class, 'DailyInvoicePdf'])->name('invoice.daily.report.pdf');
 
 
+//stock
 
+Route::get('/stock/report', [StockController::class, 'stockReport'])->name('stock.report');
+Route::get('/stock/daily-report/pdf', [StockController::class, 'StockReportPdf'])->name('stock.report.pdf');
 
 // default
 Route::get('/get-category', [DefaultController::class, 'getCategory'])->name('get-category');

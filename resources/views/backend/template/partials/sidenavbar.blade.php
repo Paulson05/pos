@@ -190,12 +190,44 @@
 
                 <li class="nav-item ">
                     <a class="nav-link" href="">
-                        <span class="sidebar-mini">PL</span>
+                        <span class="sidebar-mini">AI</span>
                         <span class="sidebar-normal">Approval invoice</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('invoice.print-list')}}">
+                        <span class="sidebar-mini">PI</span>
+                        <span class="sidebar-normal">print invoice</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('invoice.daily.report')}}">
+                        <span class="sidebar-mini">DI</span>
+                        <span class="sidebar-normal">Daily invoice</span>
                     </a>
                 </li>
 
 
+
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#pages4Examples">
+            <i class="nc-icon nc-puzzle-10"></i>
+            <p>
+                Manage Stock
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse " id="pages4Examples">
+            <ul class="nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('stock.report')}}">
+                        <span class="sidebar-mini">VS</span>
+                        <span class="sidebar-normal">view  stock</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </li>

@@ -150,5 +150,34 @@ class InvoiceController extends Controller
        });
        return redirect()->route('invoice.index')->with('succcess', 'successfully approved');
    }
+
+   public function printInvoiceList(){
+
+               $alldata  = invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->where('status', '1')->get();
+               return view('backend.pages.invoice.invoice-print')->with([
+                  'alldata' => $alldata,
+               ]);
+   }
+   public function printInvoice($id){
+        $data['invoice'] = invoice::with(['invoicedetails'])->find($id);
+
+       $pdf = \PDF::loadView('backend.pages.pdf.invoice',$data);
+       return $pdf->stream('invoice.pdf');
+
+   }
+
+   public function DailyInvoice(){
+       return view('backend.pages.invoice.dailyInvoiceReport');
+   }
+
+   public function DailyInvoicePdf(Request $request){
+               $sdate = date('y-m-d', strtotime($request->start_date));
+              $edate = date('y-m-d', strtotime($request->end_date));
+              $data['invoices'] = invoice::whereUpdatedBy('date', [$sdate,$edate])->where('status', '1')->get();
+              $data['start_date']   = date('y-m-d', strtotime($request->start_date));
+              $data['end_date']  = date('y-m-d', strtotime($request->end_date));
+              $pdf = \PDF::loadView('backend.pages.pdf.daily-invoice-report-pdf',$data);
+              return $pdf->stream('invoice.pdf');
+   }
 }
 
