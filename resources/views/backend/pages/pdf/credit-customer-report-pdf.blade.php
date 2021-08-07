@@ -8,7 +8,7 @@
 
     <form method="post" action="">
         @csrf
-        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" style="width:100%">
+        <table border="1" style="width: 100%; ">
             <thead>
             <tr class="text-center">
                 <td>S/N</td>
@@ -22,17 +22,27 @@
             </thead>
 
             <tbody>
+            @php
+                $total_due = '0';
+            @endphp
             @foreach($customer as $data)
                 <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
                     <td>{{$data->customer->name}} {{$data->customer->mobile_no}}-{{$data->customer->address}} </td>
-                    <td>{{$data->invoice->invoice_no}}</td>
+                    <td>invove no #{{$data->invoice->invoice_no}}</td>
                     <td>{{date('d-m-y',strtotime($data->invoice->date))}}</td>
                     <td>${{$data->due_amount}}</td>
 
 
                 </tr>
             @endforeach
+            @php
+            $total_due += $data->due_amount
+            @endphp
+            <tr>
+                <td colspan="4" style="text-align: right">GrandTotal</td>
+                <td>{{$total_due}}</td>
+            </tr>
             </tbody>
         </table>
 

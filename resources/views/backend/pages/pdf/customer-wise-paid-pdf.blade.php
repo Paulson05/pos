@@ -29,20 +29,14 @@
                 <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
                     <td>{{$data->customer->name}} {{$data->customer->mobile_no}}-{{$data->customer->address}} </td>
-                    <td>invove no #{{$data->invoice->invoice_no}}</td>
+                    <td>invoice no #{{$data->invoice->invoice_no}}</td>
                     <td>{{date('d-m-y',strtotime($data->invoice->date))}}</td>
                     <td>${{$data->due_amount}}</td>
 
 
                 </tr>
             @endforeach
-            @php
-            $total_due += $data->due_amount
-            @endphp
-            <tr>
-                <td colspan="4" style="text-align: right">GrandTotal</td>
-                <td>{{$total_due}}</td>
-            </tr>
+
             </tbody>
         </table>
 

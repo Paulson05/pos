@@ -68,7 +68,13 @@ Route::put('/update-customer/{id}', [CustomerController::class, 'update']);
 Route::delete('/delete-customer/{id}', [CustomerController::class, 'destroy']);
 Route::get('/customer-report', [CustomerController::class, 'customerReport'])->name('customer.report');
 Route::get('/customer-report/pdf', [CustomerController::class, 'customerReportPdf'])->name('customer.report.pdf');
+Route::get('/invoice/details/pdf/{invoice_id}', [CustomerController::class, 'invoiceDetailPdf'])->name('invoice.detail.pdf');
 
+Route::get('/paid-customer', [CustomerController::class, 'paidCustomer'])->name('paid.customer');
+Route::get('/paid-customer/pdf', [CustomerController::class, 'paidCustomerPdf'])->name('paid.customer.pdf');
+Route::get('/customer-wise-report/', [CustomerController::class, 'customerWiseReport'])->name('customer.wise.report');
+Route::get('/customer-wise-credit/pdf', [CustomerController::class, 'customerWiseCreditPdf'])->name('customer.wise.credit.pdf');
+Route::get('/customer-wise-paid/pdf', [CustomerController::class, 'customerWisePaidPdf'])->name('customer.wise.paid.pdf');
 
 //purchase
 

@@ -30,6 +30,39 @@ class CustomerController extends Controller
         $pdf = \PDF::loadView('backend.pages.pdf.credit-customer-report-pdf',$data);
         return $pdf->stream('invoice.pdf');
     }
+public function invoiceDetailPdf($invoice_id){
+      $data['payment'] =payment::where('invoice_id', $invoice_id)->first();
+    $pdf = \PDF::loadView('backend.pages.pdf.invoice-details-pdf',$data);
+    return $pdf->stream('invoice.pdf');
+}
+
+public function paidCustomer(){
+        $allData = payment::where('paid_status', '!=', 'full_due')->get();
+        return view('backend.pages.customer.paid-customer')->with([
+            'allData' => $allData
+        ]);
+
+}
+    public function paidCustomerPdf(){
+        $data['allData'] = payment::where('paid_status', '!=', 'full_due')->get();
+        $pdf = \PDF::loadView('backend.pages.pdf.paid-customer-report-pdf',$data);
+        return $pdf->stream('invoice.pdf');
+    }
+
+    public function customerWiseReport(){
+        return view('backend.pages.customer.customer-wise-report');
+    }
+
+    public function customerWiseCreditPdf(Request $request){
+        $data['allData'] = payment::where('customers_id',$request->customer_id)->whereIn('paid_status', ['full_due', 'partial_paid'])->get();
+        $pdf = \PDF::loadView('backend.pages.pdf.customer-wise-credit-pdf',$data);
+        return $pdf->stream('invoice.pdf');
+    }
+    public function customerWisePaidPdf(Request $request){
+        $data['allData'] = payment::where('customers_id',$request->customer_id)->where('paid_status', '!=', 'full_due')->get();
+        $pdf = \PDF::loadView('backend.pages.pdf.customer-wise-paid-pdf',$data);
+        return $pdf->stream('invoice.pdf');
+    }
 
     /**
      * Show the form for creating a new resource.

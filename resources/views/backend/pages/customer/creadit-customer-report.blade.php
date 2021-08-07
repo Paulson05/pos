@@ -42,7 +42,7 @@
                                         <td>{{date('d-m-y',strtotime($data->invoice->date))}}</td>
                                         <td>${{$data->due_amount}}</td>
                                         <td><button type="button"   class="edit_customer btn btn-primary" >edit</button></td>
-                                        <td><button type="button"   class="delete_post btn btn-primary" >delete</button></td>
+                                        <td><a href="{{route('invoice.detail.pdf', $data->invoice_id )}}"   class="btn btn-primary" >view</a></td>
 
                                     </tr>
                                     @endforeach

@@ -149,6 +149,18 @@
                         <p>Credit Customer Report</p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('paid.customer')}}">
+                        <i class="nc-icon nc-chart-bar-32"></i>
+                        <p>Customer Paid</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('customer.wise.report')}}">
+                        <i class="nc-icon nc-chart-bar-32"></i>
+                        <p>Customer Wise report</p>
+                    </a>
+                </li>
 
             </ul>
         </div>

@@ -36,14 +36,7 @@
 
                 </tr>
             @endforeach
-            @php
-            $total_due += $data->due_amount
-            @endphp
-            <tr>
-                <td colspan="4" style="text-align: right">GrandTotal</td>
-                <td>{{$total_due}}</td>
-            </tr>
-            </tbody>
+
         </table>
 
         <div class="row">
