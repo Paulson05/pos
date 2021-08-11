@@ -27,6 +27,8 @@ Route::get('/', function () {
 });
 //product
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+Route::get('/product/barcode', [ProductController::class, 'getProductCode'])->name('product.barcode');
+
 Route::post('/post-product', [ProductController::class, 'store']);
 Route::get('/fetch-product', [ProductController::class, 'fetchProduct']);
 Route::get('/edit-product/{id}', [ ProductController::class, 'edit']);

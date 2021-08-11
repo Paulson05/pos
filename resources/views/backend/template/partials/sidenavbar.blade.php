@@ -63,6 +63,12 @@
                         <span class="sidebar-normal">Manage Product</span>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('product.barcode')}}">
+                        <span class="sidebar-mini">PBC</span>
+                        <span class="sidebar-normal">Product BarCode</span>
+                    </a>
+                </li>
 
 
             </ul>
