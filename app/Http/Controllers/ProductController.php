@@ -55,7 +55,6 @@ class ProductController extends Controller
             $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
             $barcodes =  $generator->getBarcode($product_code,  $generator::TYPE_STANDARD_2_5, 2, 60);
             $product = new Product();
-
             $product->suppliers_id = $request->suppliers_id;
             $product->name = $request->name;
             $product->unit_id = $request->unit_id;

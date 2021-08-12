@@ -10,11 +10,8 @@
                     {{--                            <li class="breadcrumb-item active" aria-current="page">({{\App\Models\invoice::count()}})</li>--}}
                 </ol>
             </nav>
-            <div class="card">
 
-
-            </div>
-            <div class="row">
+            <div class="row ">
 
                 @foreach($productBarCode as $product)
                     <div class="col-md-5">
