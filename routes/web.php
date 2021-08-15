@@ -10,6 +10,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('backend.template.default');
+});
+Route::get('/qr-code-g', function () {
+
+    \QrCode::size(500)
+        ->format('png')
+        ->generate('ItSolutionStuff.com', public_path('images/qrcode.png'));
+
+    return view('qrcode.index');
+
 });
 //product
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
