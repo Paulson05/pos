@@ -34,8 +34,8 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
 <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 <!-- CSS Files -->
-<link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-<link href="{{asset('backend/assets/css/light-bootstrap-dashboard790f.css?v=2.0.1')}}" rel="stylesheet" />
+<link href="{{secure_asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+<link href="{{secure_asset('backend/assets/css/light-bootstrap-dashboard790f.css?v=2.0.1')}}" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="{{asset('backend/assets/css/demo.css')}}" rel="stylesheet" />
 <!-- Google Tag Manager -->
